@@ -8,12 +8,17 @@
 
 <h:head></h:head> 
 <body>
+<h:form id="form">
     <rich:panel>
         <f:facet name="header">
-        esta es una prueba
-        <h:commandButton action="#{hello.sayHello()}" value="Submit" />
+        esta es una prueba          
         </f:facet>
-		<h:outputText value="Cuerpo del Panel" /> 
+		<h:outputText value="Presione el boton" /> 
+		<h:commandButton action="#{hello.sayHello()}" value="Submit" />
+		
+		 <f:facet name="header">Mensaje del servidor #</f:facet>
+                #{hello.mensaje}
 	</rich:panel>
+	</h:form>
 </body> 
 </html>

@@ -24,6 +24,15 @@ public class RestService {
 		return personService.sayHello("Ana");
 		
 	}
+	
+	@GET
+	@Path("bye")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String sayBye(){
+		System.out.println("en bye*********************");
+		return personService.sayHello("Bye Ana");
+		
+	}
 }
 
 
