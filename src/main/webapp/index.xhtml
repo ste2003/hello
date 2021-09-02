@@ -13,11 +13,21 @@
         <f:facet name="header">
         esta es una prueba          
         </f:facet>
-		<h:outputText value="Presione el boton" /> 
-		<h:commandButton action="#{hello.sayHello()}" value="Submit" />
+        <p class="input">
+        	<h:outputText value="Ingrese su nombre" />
+        	<h:inputText id="nameInput" value="#{hello.nombre}"  />
+        </p>
+        
+			<h:outputText value="Presione el boton" />		
+			<h:commandButton action="#{hello.sayHello()}" value="Submit" />
 		
 		 <f:facet name="header">Mensaje del servidor #</f:facet>
                 #{hello.mensaje}
+         <br class="clear"></br>       
+        <h:panelGroup id="output">
+			<h:outputText value="PanelGroup: #{hello.mensaje}!"
+			rendered="#{not empty hello.mensaje}" />
+		</h:panelGroup>        
 	</rich:panel>
 	</h:form>
 </body> 
