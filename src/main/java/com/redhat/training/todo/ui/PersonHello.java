@@ -1,6 +1,7 @@
 package com.redhat.training.todo.ui;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -21,7 +22,16 @@ public class PersonHello {
 	String mensaje;
 	String name;
 	List<Person> lista;
+	Set<Group> groups;
 	
+	public Set<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
+	}
+
 	private Group currentGroup;
 	
 	@Inject
@@ -32,7 +42,8 @@ public class PersonHello {
 	
 	@PostConstruct
 	public void setGroup() {
-		currentGroup = groupRepo.findById((long)1); 	
+		currentGroup = groupRepo.findById((long)1);
+		groups = groupRepo.getAllGroups();
 	}
 
 	public void listAllPersons(){
@@ -45,6 +56,14 @@ public class PersonHello {
 		return ;	
 	}
 	
+	public List<Person> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<Person> lista) {
+		this.lista = lista;
+	}
+
 	public String getName() {
 		return name;
 	}

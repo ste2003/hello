@@ -1,5 +1,7 @@
 package com.redhat.training.todo.data;
 
+import java.util.Set;
+
 import javax.enterprise.context.ApplicationScoped;
 
 import com.redhat.training.todo.model.Group;
@@ -13,6 +15,8 @@ public class GroupRepository {
 		return g;
 	}
 	
-	
+	public Set<Group> getAllGroups(){
+		return null;
+	}
 	
 }

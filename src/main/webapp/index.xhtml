@@ -17,7 +17,11 @@
         	<h:outputText value="Ingrese grupo" />
         	<h:inputText id="nameInput" value="#{hello.name}"  />
         </p>
-        
+        <p>
+        <h:selectOneMenu value="#{hello.currentGroup}">
+    		<f:selectItems value="#{hello.groups}" />
+		</h:selectOneMenu>
+        </p>
 			<h:outputText value="Buscar personas de ese grupo" />		
 			<h:commandButton action="#{hello.listAllPersons()}" value="Submit" />
 		
