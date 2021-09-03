@@ -36,20 +36,20 @@ public class RestService {
 	}
 	
 	@GET
-	@Path("{nombre}")
+	@Path("{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String hello(@PathParam("nombre") String nombre){
+	public String hello(@PathParam("name") String name){
 		System.out.println("en hello*********************");
-		return personService.sayHello(nombre);
+		return personService.sayHello(name);
 		
 	}
 	
 	@GET
-	@Path("/probando/{nombre}")
+	@Path("/probando/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String probando(@PathParam("nombre") String nombre){
+	public String probando(@PathParam("name") String name){
 		System.out.println("en probando*********************");
-		return personService.sayHello(nombre);
+		return personService.sayHello(name);
 		
 	}
 }

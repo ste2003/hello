@@ -11,12 +11,13 @@ public class PersonService {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String sayHello(String nombre) {
+	public String sayHello(String name) {
 		//log.info("Adding new task: " + item.getDescription());
 		//item.setId((long) (itemRepository.getItemCount() + 1));
 		Person p = new Person();
-		p.setNombre(nombre);
-		return "Hola " + p.getNombre();
+		p.setName(name);
+		return "Hola " + p.getName();
 	}
+	
 	
 }

@@ -14,18 +14,18 @@
         esta es una prueba          
         </f:facet>
         <p class="input">
-        	<h:outputText value="Ingrese su nombre" />
-        	<h:inputText id="nameInput" value="#{hello.nombre}"  />
+        	<h:outputText value="Ingrese grupo" />
+        	<h:inputText id="nameInput" value="#{hello.name}"  />
         </p>
         
-			<h:outputText value="Presione el boton" />		
-			<h:commandButton action="#{hello.sayHello()}" value="Submit" />
+			<h:outputText value="Buscar personas de ese grupo" />		
+			<h:commandButton action="#{hello.listAllPersons()}" value="Submit" />
 		
 		 <f:facet name="header">Mensaje del servidor #</f:facet>
                 #{hello.mensaje}
          <br class="clear"></br>       
         <h:panelGroup id="output">
-			<h:outputText value="PanelGroup: #{hello.mensaje}!"
+			<h:outputText value="Lista: #{hello.mensaje}!"
 			rendered="#{not empty hello.mensaje}" />
 		</h:panelGroup>        
 	</rich:panel>

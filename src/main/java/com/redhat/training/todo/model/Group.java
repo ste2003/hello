@@ -1,22 +1,15 @@
 package com.redhat.training.todo.model;
 
-public class Person {
+public class Group {
+	
 	Long id;
 	String name;
-	
-	
-	public Long getId() {
-		return id;
+
+	@Override
+	public String toString() {
+		return "Group [id=" + id + ", name=" + name + "]";
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -25,6 +18,7 @@ public class Person {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -33,7 +27,7 @@ public class Person {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Person other = (Person) obj;
+		Group other = (Group) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -46,9 +40,25 @@ public class Person {
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Person [id=" + id + ", name=" + name + "]";
+
+	public Long getId() {
+		return id;
 	}
-	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Group() {
+		// TODO Auto-generated constructor stub
+	}
+
 }
