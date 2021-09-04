@@ -18,13 +18,27 @@
         	<h:inputText id="nameInput" value="#{hello.name}"  />
         </p>
         <p>
-        <h:selectOneMenu value="#{hello.currentGroup}">
-    		<f:selectItems value="#{hello.groups}" />
+        <h:outputLabel value="Elija un grupo " for="group" />
+        <h:selectOneMenu id="group" value="#{hello.currentGroup}" valueChangeListener="#{hello.update}" 
+        onchange="submit()" converter="SelectItemToEntityConverter">
+    		<f:selectItem itemLabel="Elija uno ..." itemValue="#{null}" ></f:selectItem>
+    		<f:selectItems value="#{hello.groups}" var="gr" itemValue="#{gr}" itemLabel="#{gr.name}" />
 		</h:selectOneMenu>
         </p>
 			<h:outputText value="Buscar personas de ese grupo" />		
 			<h:commandButton action="#{hello.listAllPersons()}" value="Submit" />
-		
+		<p>
+			<h:message for="group" />
+		</p>
+		<p>
+			<h:outputLabel value="Personas"></h:outputLabel>
+			<br class="clear"></br>
+			<ul>
+				<ui:repeat value="#{hello.lista}" var="person">
+					<li> <strong>Nombre:</strong><h:outputText value="#{person.name}"></h:outputText>	</li>
+				</ui:repeat>
+			</ul>
+		</p>
 		 <f:facet name="header">Mensaje del servidor #</f:facet>
                 #{hello.mensaje}
          <br class="clear"></br>       

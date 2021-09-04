@@ -1,9 +1,9 @@
 package com.redhat.training.todo.model;
 
 public class Person {
-	Long id;
-	String name;
-	
+	private Long id;
+	private String name;
+	private Long grupo;
 	
 	public Long getId() {
 		return id;
@@ -49,6 +49,12 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", name=" + name + "]";
+	}
+	public Long getGrupo() {
+		return grupo;
+	}
+	public void setGrupo(Long grupo) {
+		this.grupo = grupo;
 	}
 	
 }

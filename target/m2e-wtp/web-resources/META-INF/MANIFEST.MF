@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: sandra.encina
-Build-Jdk: 1.8.0_171
+Built-By: usuario
+Build-Jdk: 11.0.10
 Created-By: Maven Integration for Eclipse
 

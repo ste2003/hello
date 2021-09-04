@@ -1,11 +1,14 @@
 package com.redhat.training.todo.ui;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,10 +22,12 @@ import com.redhat.training.todo.service.PersonService;
 @Named("hello")
 public class PersonHello {
 	
-	String mensaje;
-	String name;
-	List<Person> lista;
+	private String mensaje;
+	private String name;
+	private List<Person> lista;
+	private Set<Person> persons;
 	Set<Group> groups;
+	private Group currentGroup;
 	
 	public Set<Group> getGroups() {
 		return groups;
@@ -32,8 +37,16 @@ public class PersonHello {
 		this.groups = groups;
 	}
 
-	private Group currentGroup;
-	
+
+	public Set<Person> getPersons() {
+		return persons;
+	}
+
+	public void setPersons(Set<Person> persons) {
+		this.persons = persons;
+	}
+
+
 	@Inject
 	private GroupRepository groupRepo;
 	
@@ -41,18 +54,23 @@ public class PersonHello {
 	private PersonRepository personRepo;
 	
 	@PostConstruct
-	public void setGroup() {
+	public void setGroup() {		
+		
 		currentGroup = groupRepo.findById((long)1);
 		groups = groupRepo.getAllGroups();
+		System.out.println("*********** en setGroup***************"+groups);
 	}
 
+
 	public void listAllPersons(){
-		currentGroup.setId((long)1);
-		currentGroup.setName("probando grupo");
+		System.out.println("en listAllPersons antes ");
+		//currentGroup.setId((long)1);
+		//currentGroup.setName("sistemas");
+		System.out.println("en listAllPersons luego ");
 		lista = personRepo.findAllPersonsForGroup(currentGroup);
 		//name = personRepo.findAllPersonsForGroup();
-		this.mensaje = lista.toString(); 
-		System.out.println(this.mensaje);
+		//this.mensaje = lista.toString(); 
+		System.out.println("lista de personas  " + lista);
 		return ;	
 	}
 	
@@ -95,5 +113,21 @@ public class PersonHello {
 
 	public void setCurrentGroup(Group currentGroup) {
 		this.currentGroup = currentGroup;
+	}
+	
+	public List<Person> getPersonList(){
+		if(persons != null) {
+			return new ArrayList<Person>(persons);
+		} else {
+			return new ArrayList<Person>();
+		}
+	}
+	public void update(ValueChangeEvent event) {
+		System.out.println("!!!!!!!!!!! event "+event.getNewValue());
+		Group group = (Group) event.getNewValue();
+		System.out.println("grupo en upda*******" + group);
+		Set<Person> persona = new HashSet<Person>();
+		//persona = group
+		persons = new HashSet<Person>(group.getPersons());
 	}
 }

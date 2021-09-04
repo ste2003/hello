@@ -27,13 +27,14 @@ public class PersonRepository {
 		Person p1 = new Person();
 		p1.setId((long)1);
 		p1.setName("persona1");
+		p1.setGrupo((long)1);
 		Person p2 = new Person();
 		p2.setId((long)2);
 		p2.setName("persona2");
-		
+		p2.setGrupo((long)2);
 		list.add(p1);
 		list.add(p2);
-		System.out.println(list);
+		System.out.println("en PersonRepo findallpersonsforgroup..."+list);
 		// return list
 		return list;
 	}

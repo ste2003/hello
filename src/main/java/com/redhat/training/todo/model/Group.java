@@ -1,9 +1,21 @@
 package com.redhat.training.todo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Group {
 	
-	Long id;
-	String name;
+	private Long id;
+	private String name;
+	private Set<Person> persons;
+	
+	public Group(Long id, String name) {
+		this.id=id;
+		this.name=name;		
+	}
+	public Group() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public String toString() {
@@ -57,8 +69,17 @@ public class Group {
 		this.name = name;
 	}
 
-	public Group() {
-		// TODO Auto-generated constructor stub
+	public Set<Person> getPersons() {
+		Person p1 = new Person();
+		p1.setId((long)1);
+		p1.setName("persona1");
+		Person p2 = new Person();
+		p2.setId((long)2);
+		p2.setName("persona2");
+		Set<Person> p = new HashSet<Person>();
+		p.add(p1);
+		p.add(p2);
+		return p;
 	}
 
 }
