@@ -9,6 +9,7 @@
 <h:head></h:head> 
 <body>
 <h:form id="form">
+
     <rich:panel>
         <f:facet name="header">
         esta es una prueba          
@@ -25,8 +26,14 @@
     		<f:selectItems value="#{hello.groups}" var="gr" itemValue="#{gr}" itemLabel="#{gr.name}" />
 		</h:selectOneMenu>
         </p>
-			<h:outputText value="Buscar personas de ese grupo" />		
-			<h:commandButton action="#{hello.listAllPersons()}" value="Submit" />
+		<h:outputText value="Buscar personas de ese grupo" />		
+		<h:commandButton action="#{hello.listAllPersons()}" value="Submit" />
+		
+		<br></br>
+			<h:outputText value="Inicializar datos" />		
+			<h:commandButton action="#{hello.startDB()}" value="Submit" />
+		
+		
 		<p>
 			<h:message for="group" />
 		</p>
@@ -34,7 +41,7 @@
 			<h:outputLabel value="Personas"></h:outputLabel>
 			<br class="clear"></br>
 			<ul>
-				<ui:repeat value="#{hello.lista}" var="person">
+				<ui:repeat value="#{hello.personList}" var="person">
 					<li> <strong>Nombre:</strong><h:outputText value="#{person.name}"></h:outputText>	</li>
 				</ui:repeat>
 			</ul>

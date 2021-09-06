@@ -2,14 +2,13 @@ package com.redhat.training.todo.ui;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.function.Predicate;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UISelectItems;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import com.redhat.training.todo.model.Group;
+import com.redhat.training.todo.model.Grupo;
 
 @FacesConverter(value="SelectItemToEntityConverter")
 public class SelectItemConverter implements Converter {
@@ -27,30 +26,30 @@ public class SelectItemConverter implements Converter {
 	public String getAsString(FacesContext ctx, UIComponent comp, Object value) {
 		String s = "";
 		if (value != null) {
-			s = ((Group) value).getId().toString();
+			s = ((Grupo) value).getId().toString();
 		}
 		return s;
 	}
 	
-	private Group getSelectedItemAsEntity(UIComponent comp, String value) {
-		Group person = null;
+	private Grupo getSelectedItemAsEntity(UIComponent comp, String value) {
+		Grupo person = null;
 		System.out.println("value: !!!!!" + value);
-		Set<Group> selectPersons = null;
+		Set<Grupo> selectPersons = null;
 		for (UIComponent uic : comp.getChildren()) {
 			if (uic instanceof UISelectItems) {
 				Long personId = Long.valueOf(value);
 				System.out.println("personId: !!!!!" + personId);
-				selectPersons = (Set<Group>) ((UISelectItems) uic).getValue();
+				selectPersons = (Set<Grupo>) ((UISelectItems) uic).getValue();
 				System.out.println("***SelectPersons: ****" + selectPersons);
 				
 				if(personId !=null && selectPersons != null && !selectPersons.isEmpty()) {
 					
 					
 					
-					  for (Group group : selectPersons) {
-					    if (group.getId().equals(personId)) {
-					    	System.out.println("Encontre!!" + group);
-					    	person = group;
+					  for (Grupo grupo : selectPersons) {
+					    if (grupo.getId().equals(personId)) {
+					    	System.out.println("Encontre!!" + grupo);
+					    	person = grupo;
 					      break;
 					    }
 					  }

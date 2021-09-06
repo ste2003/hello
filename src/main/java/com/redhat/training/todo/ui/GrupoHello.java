@@ -7,7 +7,7 @@ import com.redhat.training.todo.model.Person;
 
 @RequestScoped
 @Named("group")
-public class GroupHello {
+public class GrupoHello {
 	private String nombre;
 	
 	private Person person;

@@ -12,9 +12,9 @@ import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.redhat.training.todo.data.GroupRepository;
+import com.redhat.training.todo.data.GrupoRepository;
 import com.redhat.training.todo.data.PersonRepository;
-import com.redhat.training.todo.model.Group;
+import com.redhat.training.todo.model.Grupo;
 import com.redhat.training.todo.model.Person;
 import com.redhat.training.todo.service.PersonService;
 
@@ -26,15 +26,15 @@ public class PersonHello {
 	private String name;
 	private List<Person> lista;
 	private Set<Person> persons;
-	Set<Group> groups;
-	private Group currentGroup;
+	Set<Grupo> Grupos;
+	private Grupo currentGrupo;
 	
-	public Set<Group> getGroups() {
-		return groups;
+	public Set<Grupo> getGrupos() {
+		return Grupos;
 	}
 
-	public void setGroups(Set<Group> groups) {
-		this.groups = groups;
+	public void setGrupos(Set<Grupo> Grupos) {
+		this.Grupos = Grupos;
 	}
 
 
@@ -48,27 +48,26 @@ public class PersonHello {
 
 
 	@Inject
-	private GroupRepository groupRepo;
+	private GrupoRepository GrupoRepo;
 	
 	@Inject
 	private PersonRepository personRepo;
 	
 	@PostConstruct
-	public void setGroup() {		
-		
-		currentGroup = groupRepo.findById((long)1);
-		groups = groupRepo.getAllGroups();
-		System.out.println("*********** en setGroup***************"+groups);
+	public void setGrupo() {		
+		personRepo.seedTodoList();
+		GrupoRepo.seedTodoList();
+		currentGrupo = GrupoRepo.findById((long)1);
+		Grupos = GrupoRepo.getAllGrupos();
+		System.out.println("*********** en setGrupo***************"+Grupos);
 	}
 
 
 	public void listAllPersons(){
-		System.out.println("en listAllPersons antes ");
-		//currentGroup.setId((long)1);
-		//currentGroup.setName("sistemas");
-		System.out.println("en listAllPersons luego ");
-		lista = personRepo.findAllPersonsForGroup(currentGroup);
-		//name = personRepo.findAllPersonsForGroup();
+		System.out.println("en listAllPersons PersonHello ");
+
+		lista = personRepo.findAllPersonsForGrupo(currentGrupo);
+		//name = personRepo.findAllPersonsForGrupo();
 		//this.mensaje = lista.toString(); 
 		System.out.println("lista de personas  " + lista);
 		return ;	
@@ -107,12 +106,12 @@ public class PersonHello {
 		this.mensaje = mensaje;
 	}
 
-	public Group getCurrentGroup() {
-		return currentGroup;
+	public Grupo getCurrentGrupo() {
+		return currentGrupo;
 	}
 
-	public void setCurrentGroup(Group currentGroup) {
-		this.currentGroup = currentGroup;
+	public void setCurrentGrupo(Grupo currentGrupo) {
+		this.currentGrupo = currentGrupo;
 	}
 	
 	public List<Person> getPersonList(){
@@ -124,10 +123,14 @@ public class PersonHello {
 	}
 	public void update(ValueChangeEvent event) {
 		System.out.println("!!!!!!!!!!! event "+event.getNewValue());
-		Group group = (Group) event.getNewValue();
-		System.out.println("grupo en upda*******" + group);
-		Set<Person> persona = new HashSet<Person>();
-		//persona = group
-		persons = new HashSet<Person>(group.getPersons());
+		Grupo Grupo = (Grupo) event.getNewValue();
+		System.out.println("grupo en upda*******" + Grupo);
+		//persons = new HashSet<Person>(Grupo.getPersons());
+		//persona = Grupo
+		//lista = (List<Person>) persons;
+	}
+	public void startDB() {
+		personRepo.seedTodoList();
+		GrupoRepo.seedTodoList();
 	}
 }

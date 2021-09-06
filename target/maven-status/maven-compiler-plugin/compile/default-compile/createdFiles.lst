@@ -1,5 +1,0 @@
-com\redhat\training\todo\rest\RestService.class
-com\redhat\training\todo\service\PersonService.class
-com\redhat\training\todo\model\Person.class
-com\redhat\training\todo\ui\PersonHello.class
-com\redhat\training\todo\rest\JaxRsActivator.class
