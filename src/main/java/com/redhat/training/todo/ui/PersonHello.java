@@ -16,6 +16,7 @@ import com.redhat.training.todo.data.GrupoRepository;
 import com.redhat.training.todo.data.PersonRepository;
 import com.redhat.training.todo.model.Grupo;
 import com.redhat.training.todo.model.Person;
+import com.redhat.training.todo.service.GrupoService;
 import com.redhat.training.todo.service.PersonService;
 
 @RequestScoped
@@ -26,15 +27,15 @@ public class PersonHello {
 	private String name;
 	private List<Person> lista;
 	private Set<Person> persons;
-	Set<Grupo> Grupos;
+	Set<Grupo> grupos;
 	private Grupo currentGrupo;
 	
 	public Set<Grupo> getGrupos() {
-		return Grupos;
+		return grupos;
 	}
 
-	public void setGrupos(Set<Grupo> Grupos) {
-		this.Grupos = Grupos;
+	public void setGrupos(Set<Grupo> grupos) {
+		this.grupos = grupos;
 	}
 
 
@@ -48,18 +49,20 @@ public class PersonHello {
 
 
 	@Inject
-	private GrupoRepository GrupoRepo;
+	private GrupoRepository grupoRepo;
 	
 	@Inject
 	private PersonRepository personRepo;
 	
 	@PostConstruct
 	public void setGrupo() {		
-		personRepo.seedTodoList();
-		GrupoRepo.seedTodoList();
-		currentGrupo = GrupoRepo.findById((long)1);
-		Grupos = GrupoRepo.getAllGrupos();
-		System.out.println("*********** en setGrupo***************"+Grupos);
+		this.startDB();
+		currentGrupo = grupoRepo.findById((long)1);
+		grupos = grupoService.getAllGrupoSets();
+		//List<Grupo> myList;
+		//myList = grupoService.getAllGrupos();
+		//grupos = (Set<Grupo>) grupoService.getAllGrupos();
+		System.out.println("*********** en setGrupo***************"+grupos);
 	}
 
 
@@ -92,6 +95,8 @@ public class PersonHello {
 	@EJB
 	private PersonService personService;
 	
+	@EJB
+	private GrupoService grupoService;
 		
 	public String sayHello() {
 		this.mensaje = personService.sayHello("Ana");
@@ -123,14 +128,27 @@ public class PersonHello {
 	}
 	public void update(ValueChangeEvent event) {
 		System.out.println("!!!!!!!!!!! event "+event.getNewValue());
-		Grupo Grupo = (Grupo) event.getNewValue();
-		System.out.println("grupo en upda*******" + Grupo);
+		Grupo grupo = (Grupo) event.getNewValue();
+		System.out.println("grupo en upda*******" + grupo);
 		//persons = new HashSet<Person>(Grupo.getPersons());
 		//persona = Grupo
 		//lista = (List<Person>) persons;
 	}
 	public void startDB() {
-		personRepo.seedTodoList();
-		GrupoRepo.seedTodoList();
+		//personRepo.seedTodoList();
+		//GrupoRepo.seedTodoList();
+		Grupo g1 = new Grupo();
+		g1.setName("Sistemas");		
+		Grupo g2 = new Grupo();
+		g2.setName("Soporte");	
+		Grupo g3 = new Grupo();
+		g3.setName("Redes");	
+		grupoService.register(g1);
+		grupoService.register(g2);
+		grupoService.register(g3);
+		Person p1 = new Person();
+		p1.setName("Juan");
+		p1.setGrupo(g1);
+		personService.register(p1);
 	}
 }

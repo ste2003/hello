@@ -25,6 +25,14 @@ public class Person implements Serializable {
 	private Grupo grupo;
 	//private String grupo;
 	
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
 	public Person() {
 		this.setName("constructor");				
 	}

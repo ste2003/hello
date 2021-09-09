@@ -1,11 +1,15 @@
 package com.redhat.training.todo.service;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.redhat.training.todo.data.PersonRepository;
+import com.redhat.training.todo.model.Grupo;
 import com.redhat.training.todo.model.Person;
 
 @Stateless
@@ -30,5 +34,17 @@ public class PersonService {
 		return "Hola " + p.getName();
 	}
 	
+	public void register(Person p){
+		em.persist(p);		
+	}
 	
+	public List<Person> getAllPersons(){
+		TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+		List<Person> persons = query.getResultList();
+		return persons;
+
+	}
+	
+	
+
 }

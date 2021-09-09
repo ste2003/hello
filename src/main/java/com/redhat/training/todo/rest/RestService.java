@@ -1,6 +1,7 @@
 package com.redhat.training.todo.rest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import com.redhat.training.todo.service.PersonService;
 import com.redhat.training.todo.model.Grupo;
+import com.redhat.training.todo.model.Person;
 import com.redhat.training.todo.service.GrupoService;
 
 
@@ -46,15 +48,30 @@ public class RestService {
 		
 	}
 	
-	@GET
-	@Path("{name}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String hello(@PathParam("name") String name){
-		System.out.println("en hello*********************");
-		return personService.sayHello(name);
-		
-	}
+	/*
+	 * @GET
+	 * 
+	 * @Path("{name}")
+	 * 
+	 * @Produces(MediaType.APPLICATION_JSON) public String hello(@PathParam("name")
+	 * String name){ System.out.println("en hello*********************"); return
+	 * personService.sayHello(name);
+	 * 
+	 * }
+	 */
 	
+	@GET
+	@Path("grupo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Grupo> getGrupo() {
+		return grupoService.getAllGrupos();
+	}
+	@GET
+	@Path("person")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Person> getPerson() {
+		return personService.getAllPersons();
+	}
 	@GET
 	@Path("/probando/{name}")
 	@Produces(MediaType.APPLICATION_JSON)

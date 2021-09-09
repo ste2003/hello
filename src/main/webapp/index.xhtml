@@ -19,11 +19,11 @@
         	<h:inputText id="nameInput" value="#{hello.name}"  />
         </p>
         <p>
-        <h:outputLabel value="Elija un grupo " for="group" />
-        <h:selectOneMenu id="group" value="#{hello.currentGroup}" valueChangeListener="#{hello.update}" 
+        <h:outputLabel value="Elija un grupo " for="grupo" />
+        <h:selectOneMenu id="grupo" value="#{hello.currentGrupo}" valueChangeListener="#{hello.update}" 
         onchange="submit()" converter="SelectItemToEntityConverter">
     		<f:selectItem itemLabel="Elija uno ..." itemValue="#{null}" ></f:selectItem>
-    		<f:selectItems value="#{hello.groups}" var="gr" itemValue="#{gr}" itemLabel="#{gr.name}" />
+    		<f:selectItems value="#{hello.grupos}" var="gr" itemValue="#{gr}" itemLabel="#{gr.name}" />
 		</h:selectOneMenu>
         </p>
 		<h:outputText value="Buscar personas de ese grupo" />		
@@ -35,7 +35,7 @@
 		
 		
 		<p>
-			<h:message for="group" />
+			<h:message for="grupo" />
 		</p>
 		<p>
 			<h:outputLabel value="Personas"></h:outputLabel>
