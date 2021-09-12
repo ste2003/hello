@@ -56,7 +56,7 @@ public class PersonHello {
 	
 	@PostConstruct
 	public void setGrupo() {		
-		this.startDB();
+		//this.startDB();
 		currentGrupo = grupoRepo.findById((long)1);
 		grupos = grupoService.getAllGrupoSets();
 		//List<Grupo> myList;
@@ -130,6 +130,14 @@ public class PersonHello {
 		System.out.println("!!!!!!!!!!! event "+event.getNewValue());
 		Grupo grupo = (Grupo) event.getNewValue();
 		System.out.println("grupo en upda*******" + grupo);
+		//Set<Person> personas = grupo.getPersons();
+		//for (Person persona : personas) {
+		//	System.out.println("* " + persona.toString());
+		//}
+		this.persons = grupo.getPersons();
+		for (Person person : persons) {
+			System.out.println("* " + person.toString());
+		}
 		//persons = new HashSet<Person>(Grupo.getPersons());
 		//persona = Grupo
 		//lista = (List<Person>) persons;

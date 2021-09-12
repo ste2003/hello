@@ -21,7 +21,7 @@ public class Grupo implements Serializable{
 	
 	private String name;
 	
-	@OneToMany(mappedBy="grupo", fetch=FetchType.LAZY)	
+	@OneToMany(mappedBy="grupo", fetch=FetchType.EAGER)	
 	private Set<Person> persons;
 	
 	
@@ -55,7 +55,7 @@ public class Grupo implements Serializable{
 		 * new HashSet<Person>(); p.add(p1); p.add(p2); return p;
 		 */
 		//return persons;
-		return null;
+		return persons;
 	}
 
 }
