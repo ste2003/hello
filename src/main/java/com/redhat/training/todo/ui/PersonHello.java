@@ -29,7 +29,19 @@ public class PersonHello {
 	private Set<Person> persons;
 	Set<Grupo> grupos;
 	private Grupo currentGrupo;
+	private Person currentPerson;
 	
+	@Inject
+	private GrupoRepository grupoRepo;
+	
+	@Inject
+	private PersonRepository personRepo;
+	
+	@EJB
+	private PersonService personService;
+	
+	@EJB
+	private GrupoService grupoService;
 	public Set<Grupo> getGrupos() {
 		return grupos;
 	}
@@ -38,7 +50,6 @@ public class PersonHello {
 		this.grupos = grupos;
 	}
 
-
 	public Set<Person> getPersons() {
 		return persons;
 	}
@@ -46,35 +57,18 @@ public class PersonHello {
 	public void setPersons(Set<Person> persons) {
 		this.persons = persons;
 	}
-
-
-	@Inject
-	private GrupoRepository grupoRepo;
-	
-	@Inject
-	private PersonRepository personRepo;
 	
 	@PostConstruct
 	public void setGrupo() {		
-		//this.startDB();
-		currentGrupo = grupoRepo.findById((long)1);
+		//this.startDB(); //me repetia la carga
+		//currentGrupo = grupoRepo.findById((long)1);
+		currentPerson = personRepo.findById((long)1);
 		grupos = grupoService.getAllGrupoSets();
 		//List<Grupo> myList;
 		//myList = grupoService.getAllGrupos();
 		//grupos = (Set<Grupo>) grupoService.getAllGrupos();
 		System.out.println("*********** en setGrupo***************"+grupos);
-	}
-
-
-	public void listAllPersons(){
-		System.out.println("en listAllPersons PersonHello ");
-
-		lista = personRepo.findAllPersonsForGrupo(currentGrupo);
-		//name = personRepo.findAllPersonsForGrupo();
-		//this.mensaje = lista.toString(); 
-		System.out.println("lista de personas  " + lista);
-		return ;	
-	}
+	}	
 	
 	public List<Person> getLista() {
 		return lista;
@@ -92,11 +86,6 @@ public class PersonHello {
 		this.name = name;
 	}
 
-	@EJB
-	private PersonService personService;
-	
-	@EJB
-	private GrupoService grupoService;
 		
 	public String sayHello() {
 		this.mensaje = personService.sayHello("Ana");
@@ -118,8 +107,18 @@ public class PersonHello {
 	public void setCurrentGrupo(Grupo currentGrupo) {
 		this.currentGrupo = currentGrupo;
 	}
+	public void listAllPersons(){
+		System.out.println("en listAllPersons PersonHello ");
+
+		lista = personRepo.findAllPersonsForGrupo(currentGrupo);
+		//name = personRepo.findAllPersonsForGrupo();
+		//this.mensaje = lista.toString(); 
+		System.out.println("lista de personas  " + lista);
+		return ;	
+	}
 	
-	public List<Person> getPersonList(){
+	public
+	List<Person> getPersonList(){		
 		if(persons != null) {
 			return new ArrayList<Person>(persons);
 		} else {
@@ -138,6 +137,7 @@ public class PersonHello {
 		for (Person person : persons) {
 			System.out.println("* " + person.toString());
 		}
+		
 		//persons = new HashSet<Person>(Grupo.getPersons());
 		//persona = Grupo
 		//lista = (List<Person>) persons;
@@ -145,18 +145,20 @@ public class PersonHello {
 	public void startDB() {
 		//personRepo.seedTodoList();
 		//GrupoRepo.seedTodoList();
-		Grupo g1 = new Grupo();
-		g1.setName("Sistemas");		
-		Grupo g2 = new Grupo();
-		g2.setName("Soporte");	
-		Grupo g3 = new Grupo();
-		g3.setName("Redes");	
-		grupoService.register(g1);
-		grupoService.register(g2);
-		grupoService.register(g3);
-		Person p1 = new Person();
-		p1.setName("Juan");
-		p1.setGrupo(g1);
-		personService.register(p1);
+		/*
+		 * Grupo g1 = new Grupo(); g1.setName("Sistemas"); Grupo g2 = new Grupo();
+		 * g2.setName("Soporte"); Grupo g3 = new Grupo(); g3.setName("Redes");
+		 * grupoService.register(g1); grupoService.register(g2);
+		 * grupoService.register(g3); Person p1 = new Person(); p1.setName("Juan");
+		 * p1.setGrupo(g1); personService.register(p1); this.listAllPersons();
+		 */
+	}
+
+	public Person getCurrentPerson() {
+		return currentPerson;
+	}
+
+	public void setCurrentPerson(Person currentPerson) {
+		this.currentPerson = currentPerson;
 	}
 }

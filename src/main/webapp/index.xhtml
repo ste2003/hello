@@ -14,10 +14,7 @@
         <f:facet name="header">
         esta es una prueba          
         </f:facet>
-        <p class="input">
-        	<h:outputText value="Ingrese grupo" />
-        	<h:inputText id="nameInput" value="#{hello.name}"  />
-        </p>
+       
         <p>
         <h:outputLabel value="Elija un grupo " for="grupo" />
         <h:selectOneMenu id="grupo" value="#{hello.currentGrupo}" valueChangeListener="#{hello.update}" 
@@ -26,12 +23,20 @@
     		<f:selectItems value="#{hello.grupos}" var="gr" itemValue="#{gr}" itemLabel="#{gr.name}" />
 		</h:selectOneMenu>
         </p>
-		<h:outputText value="Buscar personas de ese grupo" />		
+         <p>
+        <h:outputLabel value="Elija una persona" for="person" />
+        <h:selectOneMenu id="person" value="#{hello.currentPerson}" valueChangeListener="#{hello.update}" 
+        onchange="submit()" converter="SelectItemToEntityConverter">
+    		<f:selectItem itemLabel="Elija una ..." itemValue="#{null}" ></f:selectItem>
+    		<f:selectItems value="#{hello.persons}" var="pr" itemValue="#{pr}" itemLabel="#{pr.name}" />
+		</h:selectOneMenu>
+        </p>
+		<!-- <h:outputText value="Buscar personas de ese grupo" />		
 		<h:commandButton action="#{hello.listAllPersons()}" value="Submit" />
 		
 		<br></br>
 			<h:outputText value="Inicializar datos" />		
-			<h:commandButton action="#{hello.startDB()}" value="Submit" />
+			<h:commandButton action="#{hello.startDB()}" value="Submit" /> -->
 		
 		
 		<p>
