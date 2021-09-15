@@ -48,22 +48,11 @@ public class RestService {
 		
 	}
 	
-	/*
-	 * @GET
-	 * 
-	 * @Path("{name}")
-	 * 
-	 * @Produces(MediaType.APPLICATION_JSON) public String hello(@PathParam("name")
-	 * String name){ System.out.println("en hello*********************"); return
-	 * personService.sayHello(name);
-	 * 
-	 * }
-	 */
-	
 	@GET
 	@Path("grupo")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Grupo> getGrupo() {
+		System.out.println("getGrupo*********************");
 		return grupoService.getAllGrupos();
 	}
 	@GET
@@ -80,31 +69,27 @@ public class RestService {
 		return personService.sayHello(name);
 		
 	}
-	@POST
-	@Path("/grupo")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response addGrupo(Grupo grupo){
-		System.out.println("en addGrupo*********************");
-		Response.ResponseBuilder builder = null;
-		
-		try{
-			if (grupo.getId() == null){
-				grupoService.register(grupo);
-				//grupoService.register(grupo);
-				builder = Response.ok();
-			}
-			else {
-				//Ticket ticketToUpdate = look falta
-			}
-		} catch (Exception e) {
-			Map<String, String> responseObj = new HashMap<String, String>();
-			responseObj.put("error", e.getMessage());
-			builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
-		}
-		return builder.build();
-		
-	}
+	/*
+	 * @POST
+	 * 
+	 * @Path("/grupo")
+	 * 
+	 * @Consumes(MediaType.APPLICATION_JSON)
+	 * 
+	 * @Produces(MediaType.APPLICATION_JSON) public Response addGrupo(Grupo grupo){
+	 * System.out.println("en addGrupo*********************");
+	 * Response.ResponseBuilder builder = null;
+	 * 
+	 * try{ if (grupo.getId() == null){ grupoService.register(grupo);
+	 * //grupoService.register(grupo); builder = Response.ok(); } else { //Ticket
+	 * ticketToUpdate = look falta } } catch (Exception e) { Map<String, String>
+	 * responseObj = new HashMap<String, String>(); responseObj.put("error",
+	 * e.getMessage()); builder =
+	 * Response.status(Response.Status.BAD_REQUEST).entity(responseObj); } return
+	 * builder.build();
+	 * 
+	 * }
+	 */
 }
 
 

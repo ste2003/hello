@@ -21,7 +21,7 @@ public class Grupo implements Serializable{
 	
 	private String name;
 	
-	@OneToMany(mappedBy="grupo", fetch=FetchType.EAGER)	
+	@OneToMany(mappedBy="grupo", fetch=FetchType.LAZY)	
 	private Set<Person> persons;
 	
 	
