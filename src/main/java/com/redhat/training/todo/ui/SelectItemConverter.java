@@ -37,49 +37,47 @@ public class SelectItemConverter implements Converter {
 		return s;
 	}
 	
-	private Grupo getSelectedItemAsEntity(UIComponent comp, String value) {
-		Grupo person = null;
-		Person cadaPersona = null;
+	private Object getSelectedItemAsEntity(UIComponent comp, String value) {
+		//private Grupo getSelectedItemAsEntity(UIComponent comp, String value) {
+		Grupo gperson = null;
+		Person pperson = null;
 		System.out.println("value: !!!!!" + value);
-		Set<Grupo> selectPersons = null;
-		Set<Person> selectCadaPersona = null;
+		Set<Grupo> selectGPersons = null;
+		Set<Person> selectPPersons = null;
+		String tipo = null;
 		for (UIComponent uic : comp.getChildren()) {
 			if (uic instanceof UISelectItems) {
 				
-				Long personId = Long.valueOf(value);
-				Long cadaPersonaId = Long.valueOf(value);
-				  System.out.println("()()()() person ()()()()" + comp.getId()); //grupo or person
-				 // System.out.println("(.)(.)(.)(.) cadaPerson ()()()()" + cadaPersonaId);
-				System.out.println("personId: !!!!!" + personId);
-				System.out.println("***Tipo de UISelectItems: ****" + UISelectItems.COMPONENT_FAMILY);
+				Long gpersonId = Long.valueOf(value);
+				Long ppersonId = Long.valueOf(value);			
 				
+				tipo = comp.getId();
 				
-				//selectCadaPersona = (Set<Person>) ((UISelectItems) uic).getValue(); //arreglar esta
-				
-				//if(cadaPersonaId !=null && selectCadaPersona != null && !selectCadaPersona.isEmpty()) {					
-					//  for (Person persona : selectCadaPersona) {
-					 //   if (persona.getId().equals(cadaPersonaId)) {
-					   // 	System.out.println("Encontre!!" + persona);
-					   // 	cadaPersona = persona;
-					   //   break;
-					   // }
-					//  }
-					
-					//Predicate<Group> predicate = i -> i.getId().equals(personId);
-					//person = selectPersons.stream().filter(predicate).findFirst().orElse(null);
-					//person = selectPersons.stream().filter(null).findFirst().orElse(null);
-				//}
-				
-					selectPersons = (Set<Grupo>) ((UISelectItems) uic).getValue(); //arreglar esta
-					System.out.println("***SelectPersons: ****" + selectPersons);
-					
-					
-					  if(personId !=null && selectPersons != null && !selectPersons.isEmpty()) {
-						  for (Grupo grupo : selectPersons) { 
+				if (tipo.equals("personF")) {
+					System.out.println("()()()() person ()()()()");
+					selectPPersons = (Set<Person>) ((UISelectItems) uic).getValue(); //arreglar esta
+					  if(ppersonId !=null && selectPPersons != null && !selectPPersons.isEmpty()) {
+						  for (Person p : selectPPersons) { 
 							
-							  if (grupo.getId().equals(personId)) {
+							  if (p.getId().equals(ppersonId)) {
+						  		  System.out.println("Encontre!!" + p); 
+						  		  pperson = p; 
+						  		  break; 
+						  		  } 
+							  }
+					  }
+				} else
+					{ System.out.println("()()()() grupo ()()()()");				
+					selectGPersons = (Set<Grupo>) ((UISelectItems) uic).getValue(); //arreglar esta
+					}
+										
+					
+					  if(gpersonId !=null && selectGPersons != null && !selectGPersons.isEmpty()) {
+						  for (Grupo grupo : selectGPersons) { 
+							
+							  if (grupo.getId().equals(gpersonId)) {
 						  		  System.out.println("Encontre!!" + grupo); 
-						  		  person = grupo; 
+						  		  gperson = grupo; 
 						  		  break; 
 						  		  } 
 							  }
@@ -93,8 +91,10 @@ public class SelectItemConverter implements Converter {
 				
 			}
 		}
-		 
-		return person;
+		if (tipo.equals("personF")) { 
+			return pperson;
+		} else
+			return gperson;
 		//return cadaPersona;
 	}
 	

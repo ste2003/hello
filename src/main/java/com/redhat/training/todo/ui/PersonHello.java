@@ -62,12 +62,13 @@ public class PersonHello {
 	public void setGrupo() {		
 		//this.startDB(); //me repetia la carga
 		//currentGrupo = grupoRepo.findById((long)1);
-		currentPerson = personRepo.findById((long)1);
+		//currentPerson = personRepo.findById((long)1);
 		grupos = grupoService.getAllGrupoSets();
 		//List<Grupo> myList;
 		//myList = grupoService.getAllGrupos();
 		//grupos = (Set<Grupo>) grupoService.getAllGrupos();
-		System.out.println("*********** en setGrupo***************"+grupos);
+		System.out.println("*********** en setGrupo currentPerson***************"+this.currentPerson);
+		System.out.println("*********** en setGrupo currentGrupo***************"+this.currentGrupo);
 	}	
 	
 	public List<Person> getLista() {
@@ -125,7 +126,7 @@ public class PersonHello {
 			return new ArrayList<Person>();
 		}
 	}
-	public void update(ValueChangeEvent event) {
+	public void updateG(ValueChangeEvent event) {
 		System.out.println("!!!!!!!!!!! event "+event.getNewValue());
 		Grupo grupo = (Grupo) event.getNewValue();
 		System.out.println("grupo en upda*******" + grupo);
@@ -141,6 +142,15 @@ public class PersonHello {
 		//persons = new HashSet<Person>(Grupo.getPersons());
 		//persona = Grupo
 		//lista = (List<Person>) persons;
+	}
+	public void update(ValueChangeEvent event) {
+		
+		Person persona = (Person) event.getNewValue();
+		System.out.println("persona en upda*******" + persona);
+	
+		//this.persons = grupo.getPersons();
+		
+		
 	}
 	public void startDB() {
 		//personRepo.seedTodoList();

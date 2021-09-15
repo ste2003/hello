@@ -14,18 +14,21 @@
         <f:facet name="header">
         esta es una prueba          
         </f:facet>
-       
+       <p>
+       <h:outputLabel value="Ingrese Nombre" for="nom" />
+       <h:inputText value="" valueChangeListener="#{hello.update}" onchange="submit()"/>
+       </p>
         <p>
         <h:outputLabel value="Elija un grupo " for="grupo" />
-        <h:selectOneMenu id="grupo" value="#{hello.currentGrupo}" valueChangeListener="#{hello.update}" 
+        <h:selectOneMenu id="grupo" value="#{hello.currentGrupo}" valueChangeListener="#{hello.updateG}" 
         onchange="submit()" converter="SelectItemToEntityConverter">
     		<f:selectItem itemLabel="Elija uno ..." itemValue="#{null}" ></f:selectItem>
     		<f:selectItems value="#{hello.grupos}" var="gr" itemValue="#{gr}" itemLabel="#{gr.name}" />
 		</h:selectOneMenu>
         </p>
          <p>
-        <h:outputLabel value="Elija una persona" for="person" />
-        <h:selectOneMenu id="person" value="#{hello.currentPerson}" valueChangeListener="#{hello.update}" 
+        <h:outputLabel value="Elija una persona" for="personF" />
+        <h:selectOneMenu id="personF" value="#{hello.currentPerson}" valueChangeListener="#{hello.update()}" 
         onchange="submit()" converter="SelectItemToEntityConverter">
     		<f:selectItem itemLabel="Elija una ..." itemValue="#{null}" ></f:selectItem>
     		<f:selectItems value="#{hello.persons}" var="pr" itemValue="#{pr}" itemLabel="#{pr.name}" />
