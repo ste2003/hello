@@ -118,8 +118,7 @@ public class PersonHello {
 		return ;	
 	}
 	
-	public
-	List<Person> getPersonList(){		
+	public List<Person> getPersonList(){		
 		if(persons != null) {
 			return new ArrayList<Person>(persons);
 		} else {
