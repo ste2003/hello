@@ -105,6 +105,30 @@ public class RestService {
 		return builder.build();
 		
 	}
+	@POST
+	@Path("/person")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addPerson(Person person){
+		System.out.println("en addPerson*********************");
+		Response.ResponseBuilder builder = null;
+		
+		try{
+			if (person.getId() == null){
+				personService.register(person);				
+				builder = Response.ok();
+			}
+			else {
+				//Ticket ticketToUpdate = look falta
+			}
+		} catch (Exception e) {
+			Map<String, String> responseObj = new HashMap<String, String>();
+			responseObj.put("error", e.getMessage());
+			builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
+		}
+		return builder.build();
+		
+	}
 }
 
 
