@@ -17,8 +17,16 @@ public class Person implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
-	private String name;
+	private String sugerencia;
+	
+	private String genero;
+	
+	private String tiempo;
+
+	private String resuelto;
+
+	private String cursos;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="grupoID")
@@ -34,7 +42,7 @@ public class Person implements Serializable {
 	}
 
 	public Person() {
-		this.setName("constructor");				
+		this.setSugerencia("constructor");				
 	}
 
 	/*
@@ -49,16 +57,49 @@ public class Person implements Serializable {
 	/*
 	 * public void setId(Long id) { this.id = id; }
 	 */
-	public String getName() {
-		return name;
+	public String getSugerencia() {
+		return sugerencia;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setSugerencia(String sugerencia) {
+		this.sugerencia = sugerencia;
 	}
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", name=" + name + ", grupo=" + grupo + "]";
+		return "Person [id=" + id + ", sugerencia=" + sugerencia + ", genero=" + genero + ", tiempo=" + tiempo
+				+ ", resuelto=" + resuelto + ", cursos=" + cursos + ", grupo=" + grupo + "]";
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public String getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(String tiempo) {
+		this.tiempo = tiempo;
+	}
+
+	public String getResuelto() {
+		return resuelto;
+	}
+
+	public void setResuelto(String resuelto) {
+		this.resuelto = resuelto;
+	}
+
+	public String getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(String cursos) {
+		this.cursos = cursos;
 	}
 
 	/*

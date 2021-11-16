@@ -26,16 +26,9 @@ public class PersonService {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String sayHello(String name) {
-		//log.info("Adding new task: " + item.getDescription());
-		//item.setId((long) (itemRepository.getItemCount() + 1));
-		Person p = new Person();
-		p.setName(name);
-		return "Hola " + p.getName();
-	}
-	
-	public void register(Person p){
-		em.persist(p);		
+	public String register(Person p){
+		em.persist(p);	
+		return "Su encuesta fue registrada. Muchas gracias!";
 	}
 	
 	public List<Person> getAllPersons(){

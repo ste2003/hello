@@ -31,34 +31,6 @@ public class RestService {
 	@EJB
 	GrupoService grupoService;
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public String sayHelloRest(){
-		System.out.println("en get*********************");
-		return personService.sayHello("Ana");
-		
-	}
-	
-	@GET
-	@Path("bye")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String sayBye(){
-		System.out.println("en bye*********************");
-		return personService.sayHello("Bye Ana");
-		
-	}
-	
-	/*
-	 * @GET
-	 * 
-	 * @Path("{name}")
-	 * 
-	 * @Produces(MediaType.APPLICATION_JSON) public String hello(@PathParam("name")
-	 * String name){ System.out.println("en hello*********************"); return
-	 * personService.sayHello(name);
-	 * 
-	 * }
-	 */
 	
 	@GET
 	@Path("grupo")
@@ -72,14 +44,7 @@ public class RestService {
 	public List<Person> getPerson() {
 		return personService.getAllPersons();
 	}
-	@GET
-	@Path("/probando/{name}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String probando(@PathParam("name") String name){
-		System.out.println("en probando*********************");
-		return personService.sayHello(name);
-		
-	}
+
 	@POST
 	@Path("/grupo")
 	@Consumes(MediaType.APPLICATION_JSON)

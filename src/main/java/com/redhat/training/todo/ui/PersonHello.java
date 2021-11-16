@@ -11,6 +11,11 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 import com.redhat.training.todo.data.GrupoRepository;
 import com.redhat.training.todo.data.PersonRepository;
@@ -23,12 +28,16 @@ import com.redhat.training.todo.service.PersonService;
 @Named("hello")
 public class PersonHello {
 	
+	
 	private String mensaje;
-	private String name;
-	private List<Person> lista;
-	private Set<Person> persons;
+	private String genero;
+	private String tiempo;
+	private String resuelto;
+	private String sugerencia;
+	private String cursos;
 	Set<Grupo> grupos;
 	private Grupo currentGrupo;
+	
 	private Person currentPerson;
 	
 	@Inject
@@ -50,47 +59,47 @@ public class PersonHello {
 		this.grupos = grupos;
 	}
 
-	public Set<Person> getPersons() {
-		return persons;
-	}
-
-	public void setPersons(Set<Person> persons) {
-		this.persons = persons;
-	}
 	
 	@PostConstruct
-	public void setGrupo() {		
-		//this.startDB(); //me repetia la carga
-		//currentGrupo = grupoRepo.findById((long)1);
-		//currentPerson = personRepo.findById((long)1);
-		grupos = grupoService.getAllGrupoSets();
-		//List<Grupo> myList;
-		//myList = grupoService.getAllGrupos();
-		//grupos = (Set<Grupo>) grupoService.getAllGrupos();
+	public void setGrupo() {				
+		grupos = grupoService.getAllGrupoSets();		
 		System.out.println("*********** en setGrupo currentPerson***************"+this.currentPerson);
 		System.out.println("*********** en setGrupo currentGrupo***************"+this.currentGrupo);
 	}	
 	
-	public List<Person> getLista() {
-		return lista;
-	}
-
-	public void setLista(List<Person> lista) {
-		this.lista = lista;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	public String save() {
 		
-	public String sayHello() {
-		this.mensaje = personService.sayHello("Ana");
+		System.out.println("*********** en save ***************");
+		//this.currentPerson.setGrupo(currentGrupo);
+		//this.currentPerson.setGenero(currentGenero);
+		//this.currentPerson.setTiempo(currentRadio);
+		//Person p = this.currentPerson;
+		Person guardar = new Person();
+	
+		System.out.println(this.currentGrupo);
+		System.out.println(this.genero);
+		
+		
+		guardar.setGenero(this.genero);
+		guardar.setTiempo(this.tiempo);
+		guardar.setResuelto(this.resuelto);
+		guardar.setGrupo(currentGrupo);
+		guardar.setSugerencia(sugerencia);
+		guardar.setCursos(this.cursos);
+		
+	
+		this.mensaje = personService.register(guardar);
+		//this.mensaje = "Muchas gracias!";
 		return this.mensaje;
+	}
+	
+	public void updateG(ValueChangeEvent event) {
+		System.out.println("!!!!!!!!!!! event "+event.getNewValue());
+		Grupo grupo = (Grupo) event.getNewValue();
+		System.out.println("grupo en upda*******" + grupo);
+		
+		
+		
 	}
 
 	public String getMensaje() {
@@ -108,61 +117,7 @@ public class PersonHello {
 	public void setCurrentGrupo(Grupo currentGrupo) {
 		this.currentGrupo = currentGrupo;
 	}
-	public void listAllPersons(){
-		System.out.println("en listAllPersons PersonHello ");
-
-		lista = personRepo.findAllPersonsForGrupo(currentGrupo);
-		//name = personRepo.findAllPersonsForGrupo();
-		//this.mensaje = lista.toString(); 
-		System.out.println("lista de personas  " + lista);
-		return ;	
-	}
 	
-	public List<Person> getPersonList(){		
-		if(persons != null) {
-			return new ArrayList<Person>(persons);
-		} else {
-			return new ArrayList<Person>();
-		}
-	}
-	public void updateG(ValueChangeEvent event) {
-		System.out.println("!!!!!!!!!!! event "+event.getNewValue());
-		Grupo grupo = (Grupo) event.getNewValue();
-		System.out.println("grupo en upda*******" + grupo);
-		//Set<Person> personas = grupo.getPersons();
-		//for (Person persona : personas) {
-		//	System.out.println("* " + persona.toString());
-		//}
-		this.persons = grupo.getPersons();
-		for (Person person : persons) {
-			System.out.println("* " + person.toString());
-		}
-		
-		//persons = new HashSet<Person>(Grupo.getPersons());
-		//persona = Grupo
-		//lista = (List<Person>) persons;
-	}
-	public void update(ValueChangeEvent event) {
-		
-		Person persona = (Person) event.getNewValue();
-		System.out.println("persona en upda*******" + persona);
-	
-		//this.persons = grupo.getPersons();
-		
-		
-	}
-	public void startDB() {
-		//personRepo.seedTodoList();
-		//GrupoRepo.seedTodoList();
-		/*
-		 * Grupo g1 = new Grupo(); g1.setName("Sistemas"); Grupo g2 = new Grupo();
-		 * g2.setName("Soporte"); Grupo g3 = new Grupo(); g3.setName("Redes");
-		 * grupoService.register(g1); grupoService.register(g2);
-		 * grupoService.register(g3); Person p1 = new Person(); p1.setName("Juan");
-		 * p1.setGrupo(g1); personService.register(p1); this.listAllPersons();
-		 */
-	}
-
 	public Person getCurrentPerson() {
 		return currentPerson;
 	}
@@ -170,4 +125,54 @@ public class PersonHello {
 	public void setCurrentPerson(Person currentPerson) {
 		this.currentPerson = currentPerson;
 	}
+
+	public GrupoRepository getGrupoRepo() {
+		return grupoRepo;
+	}
+
+	public void setGrupoRepo(GrupoRepository grupoRepo) {
+		this.grupoRepo = grupoRepo;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public String getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(String tiempo) {
+		this.tiempo = tiempo;
+	}
+
+	public String getResuelto() {
+		return resuelto;
+	}
+
+	public void setResuelto(String resuelto) {
+		this.resuelto = resuelto;
+	}
+
+	public String getSugerencia() {
+		return sugerencia;
+	}
+
+	public void setSugerencia(String sugerencia) {
+		this.sugerencia = sugerencia;
+	}
+
+	public String getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(String cursos) {
+		this.cursos = cursos;
+	}
+
+
 }

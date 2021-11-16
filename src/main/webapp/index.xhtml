@@ -14,35 +14,62 @@
         <f:facet name="header">
         esta es una prueba          
         </f:facet>
-      
+     
         <p>
-        <h:outputLabel value="Elija un grupo " for="grupo" />
-        <h:selectOneMenu id="grupo" value="#{hello.currentGrupo}" valueChangeListener="#{hello.updateG}" 
-        onchange="submit()" converter="SelectItemToEntityConverter">
+        <h:outputLabel value="Elija circunscripción " for="grupo" />
+        <h:selectOneMenu id="grupo" value="#{hello.currentGrupo}"  converter="SelectItemToEntityConverter">>
     		<f:selectItem itemLabel="Elija uno ..." itemValue="#{null}" ></f:selectItem>
     		<f:selectItems value="#{hello.grupos}" var="gr" itemValue="#{gr}" itemLabel="#{gr.name}" />
 		</h:selectOneMenu>
         </p>	
-		
+         <p>
+         <h:outputLabel value="Género..." for="genero" />         
+        	<h:selectOneRadio value="#{hello.genero}" >
+        		<f:selectItem  itemValue="Femenino" itemLabel="Femenino" />
+        		<f:selectItem itemValue="Masculino"  itemLabel="Masculino" />
+        		<f:selectItem  itemValue="No_binario" itemLabel="No binario" />
+        	</h:selectOneRadio> 
+        </p>
+       <p>
+         <h:outputLabel value="Tiempo" for="tiempo" />  
+      	<h:selectOneRadio value="#{hello.tiempo}">
+      		<f:selectItem itemValue="Inmediatamente" itemLabel="Inmediatamente"></f:selectItem>
+      		<f:selectItem itemValue="Con_demora" itemLabel="Con demora"></f:selectItem>
+      		<f:selectItem itemValue="No_fui_atendido" itemLabel="No fui atendido"></f:selectItem>
+      	</h:selectOneRadio>
+      </p>
+       <p>
+         <h:outputLabel value="Fue resuelto" for="resuelto" />  
+      	<h:selectOneRadio value="#{hello.resuelto}">
+      		<f:selectItem itemValue="satisfactoriamente" itemLabel="Satisfactoriamente"></f:selectItem>
+      		<f:selectItem itemValue="Algo_resuelto" itemLabel="Algo Resuelto"></f:selectItem>
+      		<f:selectItem itemValue="No_fue_resueldo" itemLabel="No fue resuelto"></f:selectItem>
+      	</h:selectOneRadio>
+      </p>
+      <p>
+       	<h:outputLabel value="Sugerencia" for="sugerencia" />
+      	<h:inputText value="#{hello.sugerencia}"></h:inputText>
+      </p>
+        <p>
+       	<h:outputLabel value="Cursos" for="cursos" />
+      	<h:inputText value="#{hello.cursos}"></h:inputText>
+      </p>
+		<p>
+		<h:commandButton id="enviar" value="Enviar Encuesta" action="#{hello.save()}" />
+		</p>
+		<!-- tira error este mensaje -->
 		<p>
 			<h:message for="grupo" />
 		</p>
-		<p>
-			<h:outputLabel value="Personas"></h:outputLabel>
-			<br class="clear"></br>
-			<ul>
-				<ui:repeat value="#{hello.personList}" var="person">
-					<li> <strong>Nombre:</strong><h:outputText value="#{person.name}"></h:outputText>	</li>
-				</ui:repeat>
-			</ul>
-		</p>
+		
 		 <f:facet name="header">Mensaje del servidor #</f:facet>
                 #{hello.mensaje}
          <br class="clear"></br>       
         <h:panelGroup id="output">
 			<h:outputText value="Lista: #{hello.mensaje}!"
 			rendered="#{not empty hello.mensaje}" />
-		</h:panelGroup>        
+		</h:panelGroup>  
+		      
 	</rich:panel>
 	</h:form>
 </body> 

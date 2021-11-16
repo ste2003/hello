@@ -86,8 +86,26 @@
         </dependencies>
     </dependencyManagement>
 
-    <dependencies>
-
+    <dependencies>    	
+		<!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-client -->
+		<dependency>
+		    <groupId>org.jboss.resteasy</groupId>
+		    <artifactId>resteasy-client</artifactId>
+		    <version>3.1.4.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jaxrs -->
+		<dependency>
+		    <groupId>org.jboss.resteasy</groupId>
+		    <artifactId>resteasy-jaxrs</artifactId>
+		    <version>3.1.4.Final</version>
+		</dependency>		
+	<!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jackson-provider -->
+		<dependency>
+		    <groupId>org.jboss.resteasy</groupId>
+		    <artifactId>resteasy-jackson-provider</artifactId>
+		    <version>3.1.4.Final</version>
+		</dependency>
+	
         <!-- First declare the APIs we depend on and need for compilation. All 
             of them are provided by JBoss EAP 6 -->
 

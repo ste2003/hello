@@ -32,12 +32,7 @@ public class GrupoRepository {
 	}
 	@PostConstruct
 	public void seedTodoList() {
-		/*
-		 * myGrupoList = new HashSet<Grupo>(); myGrupoList.add(new Grupo((long)1,
-		 * "sistemas")); myGrupoList.add(new Grupo((long)2, "soporte"));
-		 * myGrupoList.add(new Grupo((long)3, "redes"));
-		 * System.out.println("----------- En GrupoRepository " + myGrupoList);
-		 */
+		
 		
 	}
 	public Set<Grupo> getAllGrupos(){
