@@ -37,6 +37,9 @@ public class PersonHello {
 	private String cursos;
 	Set<Grupo> grupos;
 	private Grupo currentGrupo;
+	private Set<Person> persons;
+	
+	private List<Person> lista;
 	
 	private Person currentPerson;
 	
@@ -61,8 +64,15 @@ public class PersonHello {
 
 	
 	@PostConstruct
-	public void setGrupo() {				
-		grupos = grupoService.getAllGrupoSets();		
+	public void setGrupo() {	
+		Grupo seed = new Grupo();
+		seed.setName("1ra Cir");
+		grupoService.register(seed);
+		Grupo seed2 = new Grupo();
+		seed2.setName("2ra Cir");
+		grupoService.register(seed2);
+		grupos = grupoService.getAllGrupoSets();	
+		
 		System.out.println("*********** en setGrupo currentPerson***************"+this.currentPerson);
 		System.out.println("*********** en setGrupo currentGrupo***************"+this.currentGrupo);
 	}	
@@ -89,8 +99,29 @@ public class PersonHello {
 		
 	
 		this.mensaje = personService.register(guardar);
+		
 		//this.mensaje = "Muchas gracias!";
+		System.out.println("*****");
+		
+		persons = this.currentGrupo.getPersons();
+		
+		//System.out.println(lista);
+		
+		//lista = personRepo.findAllPersonsForGrupo(currentGrupo);
+		//System.out.println(lista);
+		//System.out.println(persons);
+		/*
+		 * for (Person person : persons) { System.out.println("* " + person.toString());
+		 * }
+		 */
 		return this.mensaje;
+	}
+	public List<Person> getPersonList(){		
+		if(persons != null) {
+			return new ArrayList<Person>(persons);
+		} else {
+			return new ArrayList<Person>();
+		}
 	}
 	
 	public void updateG(ValueChangeEvent event) {
@@ -172,6 +203,14 @@ public class PersonHello {
 
 	public void setCursos(String cursos) {
 		this.cursos = cursos;
+	}
+
+	public Set<Person> getPersons() {
+		return persons;
+	}
+
+	public void setPersons(Set<Person> persons) {
+		this.persons = persons;
 	}
 
 

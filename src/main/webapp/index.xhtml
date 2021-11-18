@@ -57,10 +57,26 @@
 		<p>
 		<h:commandButton id="enviar" value="Enviar Encuesta" action="#{hello.save()}" />
 		</p>
+		
 		<!-- tira error este mensaje -->
 		<p>
 			<h:message for="grupo" />
 		</p>
+		
+		
+		
+		<h:outputLabel value="Encuestas"></h:outputLabel>
+			<br class="clear"></br>
+			<ul>
+				<ui:repeat value="#{hello.personList}" var="person">
+					<li> <h:outputText value="#{person.grupo.name}"></h:outputText>	
+						<h:outputText value="#{person.genero}"></h:outputText>
+						<h:outputText value="#{person.sugerencia}"></h:outputText>
+					</li>
+				</ui:repeat>
+			</ul>
+			
+			
 		
 		 <f:facet name="header">Mensaje del servidor #</f:facet>
                 #{hello.mensaje}
