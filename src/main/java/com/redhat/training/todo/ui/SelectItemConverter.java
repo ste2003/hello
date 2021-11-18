@@ -8,7 +8,7 @@ import javax.faces.component.UISelectItems;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import com.redhat.training.todo.model.Grupo;
+
 import com.redhat.training.todo.model.Person;
 
 @FacesConverter(value="SelectItemToEntityConverter")
@@ -22,14 +22,11 @@ public class SelectItemConverter implements Converter {
 		}
 		return o;
 	}
-	
 	@Override
 	public String getAsString(FacesContext ctx, UIComponent comp, Object value) {
 		String s = "";
 		if (value != null) {
-			if (value instanceof Grupo) {
-				s = ((Grupo) value).getId().toString();
-			}
+			
 			if (value instanceof Person) {
 				s = ((Person) value).getId().toString();
 			}
@@ -37,12 +34,14 @@ public class SelectItemConverter implements Converter {
 		return s;
 	}
 	
+	
+	
 	private Object getSelectedItemAsEntity(UIComponent comp, String value) {
 		//private Grupo getSelectedItemAsEntity(UIComponent comp, String value) {
-		Grupo gperson = null;
+
 		Person pperson = null;
 		System.out.println("value: !!!!!" + value);
-		Set<Grupo> selectGPersons = null;
+	
 		Set<Person> selectPPersons = null;
 		String tipo = null;
 		for (UIComponent uic : comp.getChildren()) {
@@ -68,33 +67,25 @@ public class SelectItemConverter implements Converter {
 					  }
 				} else
 					{ System.out.println("()()()() grupo ()()()()");				
-					selectGPersons = (Set<Grupo>) ((UISelectItems) uic).getValue(); //arreglar esta
+					//selectGPersons = (Set<Grupo>) ((UISelectItems) uic).getValue(); //arreglar esta
 					}
 										
 					
-					  if(gpersonId !=null && selectGPersons != null && !selectGPersons.isEmpty()) {
-						  for (Grupo grupo : selectGPersons) { 
-							
-							  if (grupo.getId().equals(gpersonId)) {
-						  		  System.out.println("Encontre!!" + grupo); 
-						  		  gperson = grupo; 
-						  		  break; 
-						  		  } 
-							  }
-					  }
-					 /* 
-					 * //Predicate<Group> predicate = i -> i.getId().equals(personId); //person =
-					 * selectPersons.stream().filter(predicate).findFirst().orElse(null); //person =
-					 * selectPersons.stream().filter(null).findFirst().orElse(null); }
+					/*
+					 * if(gpersonId !=null && selectGPersons != null && !selectGPersons.isEmpty()) {
+					 * for (Grupo grupo : selectGPersons) {
+					 * 
+					 * if (grupo.getId().equals(gpersonId)) { System.out.println("Encontre!!" +
+					 * grupo); gperson = grupo; break; } } }
 					 */
-					//selectCadaPersona = (Set<Person>) ((UISelectItems) uic).getValue();
-				
+					
 			}
 		}
 		if (tipo.equals("personF")) { 
 			return pperson;
 		} else
-			return gperson;
+			System.out.println("null en SelectItemConverter");
+			return null;
 		//return cadaPersona;
 	}
 	

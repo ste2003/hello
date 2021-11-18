@@ -17,9 +17,10 @@
      
         <p>
         <h:outputLabel value="Elija circunscripción " for="grupo" />
-        <h:selectOneMenu id="grupo" value="#{hello.currentGrupo}"  converter="SelectItemToEntityConverter">>
-    		<f:selectItem itemLabel="Elija uno ..." itemValue="#{null}" ></f:selectItem>
-    		<f:selectItems value="#{hello.grupos}" var="gr" itemValue="#{gr}" itemLabel="#{gr.name}" />
+        <h:selectOneMenu id="grupo" value="#{hello.currentGrupo}" >    		
+       		 <f:selectItem itemLabel="Elija uno ..." itemValue="#{null}" ></f:selectItem>    		
+    		<f:selectItem itemLabel="1ra Circun" itemValue="1ra Circun" ></f:selectItem>
+    		
 		</h:selectOneMenu>
         </p>	
          <p>
@@ -58,6 +59,9 @@
 		<h:commandButton id="enviar" value="Enviar Encuesta" action="#{hello.save()}" />
 		</p>
 		
+		<p>
+		<h:commandButton id="listar" value="Listar" action="#{hello.listar()}" />
+		</p>
 		<!-- tira error este mensaje -->
 		<p>
 			<h:message for="grupo" />
@@ -69,8 +73,10 @@
 			<br class="clear"></br>
 			<ul>
 				<ui:repeat value="#{hello.personList}" var="person">
-					<li> <h:outputText value="#{person.grupo.name}"></h:outputText>	
+					<li> <h:outputText value="#{person.cursos}"></h:outputText>	
+					<h:outputLabel value="-" />
 						<h:outputText value="#{person.genero}"></h:outputText>
+						<h:outputLabel value="-" />
 						<h:outputText value="#{person.sugerencia}"></h:outputText>
 					</li>
 				</ui:repeat>

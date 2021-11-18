@@ -27,17 +27,15 @@ public class Person implements Serializable {
 
 	private String cursos;
 	
+	private String grupo;
 	
-	@ManyToOne
-	@JoinColumn(name="grupoID")
-	private Grupo grupo;
-	//private String grupo;
 	
-	public Grupo getGrupo() {
+	
+	public String getGrupo() {
 		return grupo;
 	}
 
-	public void setGrupo(Grupo grupo) {
+	public void setGrupo(String grupo) {
 		this.grupo = grupo;
 	}
 

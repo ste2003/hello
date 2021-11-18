@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.redhat.training.todo.data.PersonRepository;
-import com.redhat.training.todo.model.Grupo;
 import com.redhat.training.todo.model.Person;
 
 @Stateless

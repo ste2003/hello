@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import com.redhat.training.todo.model.Grupo;
 import com.redhat.training.todo.model.Person;
 
 
@@ -33,7 +32,7 @@ public class PersonRepository {
 	public void seedTodoList() {
 		
 	}
-	public List<Person> findAllPersonsForGrupo(Grupo g){
+	public List<Person> findAllPersons(){
 		
 		System.out.println("en PersonRepo findallpersonsforgroup...");
 		// return list

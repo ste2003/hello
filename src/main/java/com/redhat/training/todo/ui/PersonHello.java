@@ -17,11 +17,10 @@ import javax.ws.rs.client.WebTarget;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
-import com.redhat.training.todo.data.GrupoRepository;
 import com.redhat.training.todo.data.PersonRepository;
-import com.redhat.training.todo.model.Grupo;
+
 import com.redhat.training.todo.model.Person;
-import com.redhat.training.todo.service.GrupoService;
+
 import com.redhat.training.todo.service.PersonService;
 
 @RequestScoped
@@ -35,16 +34,15 @@ public class PersonHello {
 	private String resuelto;
 	private String sugerencia;
 	private String cursos;
-	Set<Grupo> grupos;
-	private Grupo currentGrupo;
+	private String currentGrupo;
 	private Set<Person> persons;
-	
+	private Set<String> grupos;
 	private List<Person> lista;
+	
 	
 	private Person currentPerson;
 	
-	@Inject
-	private GrupoRepository grupoRepo;
+	
 	
 	@Inject
 	private PersonRepository personRepo;
@@ -52,31 +50,25 @@ public class PersonHello {
 	@EJB
 	private PersonService personService;
 	
-	@EJB
-	private GrupoService grupoService;
-	public Set<Grupo> getGrupos() {
-		return grupos;
-	}
 
-	public void setGrupos(Set<Grupo> grupos) {
-		this.grupos = grupos;
-	}
 
 	
 	@PostConstruct
-	public void setGrupo() {	
-		Grupo seed = new Grupo();
-		seed.setName("1ra Cir");
-		grupoService.register(seed);
-		Grupo seed2 = new Grupo();
-		seed2.setName("2ra Cir");
-		grupoService.register(seed2);
-		grupos = grupoService.getAllGrupoSets();	
+	public void setGrupo() {
 		
-		System.out.println("*********** en setGrupo currentPerson***************"+this.currentPerson);
-		System.out.println("*********** en setGrupo currentGrupo***************"+this.currentGrupo);
 	}	
 	
+	public void cargarGrupos() {
+		grupos = new HashSet<String>();
+		grupos.add("1ra Circuns");
+		grupos.add("2da Circuns");
+		grupos.add("3ra Circuns");
+	}	
+	public void listar() {
+		lista = personService.getAllPersons();
+		System.out.println("*********** en listar ***************");
+		System.out.println(lista);
+	}
 	public String save() {
 		
 		System.out.println("*********** en save ***************");
@@ -102,8 +94,7 @@ public class PersonHello {
 		
 		//this.mensaje = "Muchas gracias!";
 		System.out.println("*****");
-		
-		persons = this.currentGrupo.getPersons();
+	
 		
 		//System.out.println(lista);
 		
@@ -116,23 +107,17 @@ public class PersonHello {
 		 */
 		return this.mensaje;
 	}
-	public List<Person> getPersonList(){		
-		if(persons != null) {
-			return new ArrayList<Person>(persons);
-		} else {
-			return new ArrayList<Person>();
-		}
-	}
-	
-	public void updateG(ValueChangeEvent event) {
-		System.out.println("!!!!!!!!!!! event "+event.getNewValue());
-		Grupo grupo = (Grupo) event.getNewValue();
-		System.out.println("grupo en upda*******" + grupo);
-		
-		
-		
-	}
 
+	
+	public List<Person> getPersonList()	{ 
+		if(lista != null) {
+		  System.out.println("*********** en getPersonList() ***************");
+		  System.out.println(lista); return new ArrayList<Person>(lista); 
+		  } else {
+			  return new ArrayList<Person>(); 
+		  } 
+	}
+	 
 	public String getMensaje() {
 		return mensaje;
 	}
@@ -141,11 +126,11 @@ public class PersonHello {
 		this.mensaje = mensaje;
 	}
 
-	public Grupo getCurrentGrupo() {
+	public String getCurrentGrupo() {
 		return currentGrupo;
 	}
 
-	public void setCurrentGrupo(Grupo currentGrupo) {
+	public void setCurrentGrupo(String currentGrupo) {
 		this.currentGrupo = currentGrupo;
 	}
 	
@@ -155,15 +140,7 @@ public class PersonHello {
 
 	public void setCurrentPerson(Person currentPerson) {
 		this.currentPerson = currentPerson;
-	}
-
-	public GrupoRepository getGrupoRepo() {
-		return grupoRepo;
-	}
-
-	public void setGrupoRepo(GrupoRepository grupoRepo) {
-		this.grupoRepo = grupoRepo;
-	}
+	}	
 
 	public String getGenero() {
 		return genero;
@@ -213,5 +190,12 @@ public class PersonHello {
 		this.persons = persons;
 	}
 
+	public Set<String> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(Set<String> grupos) {
+		this.grupos = grupos;
+	}
 
 }
