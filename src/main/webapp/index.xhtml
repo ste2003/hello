@@ -16,6 +16,9 @@
         </f:facet>
      
         <p>
+         <h:outputLabel value="ENCUESTA – 2021 - Dirección General de Informática – 3ra Circunscripción Judicial"  />
+         </p>
+         <p>
         <h:outputLabel value="Elija circunscripción " for="grupo" />
         <h:selectOneMenu id="grupo" value="#{hello.currentGrupo}" >    		
        		 <f:selectItem itemLabel="Elija uno ..." itemValue="#{null}" ></f:selectItem>    		
@@ -32,7 +35,7 @@
         	</h:selectOneRadio> 
         </p>
        <p>
-         <h:outputLabel value="Tiempo" for="tiempo" />  
+         <h:outputLabel value="Cuando necesitaste asistencia técnica de esta delegación:¿cómo fuiste atendido/a?" for="tiempo" />  
       	<h:selectOneRadio value="#{hello.tiempo}">
       		<f:selectItem itemValue="Inmediatamente" itemLabel="Inmediatamente"></f:selectItem>
       		<f:selectItem itemValue="Con_demora" itemLabel="Con demora"></f:selectItem>
@@ -40,21 +43,23 @@
       	</h:selectOneRadio>
       </p>
        <p>
-         <h:outputLabel value="Fue resuelto" for="resuelto" />  
+         <h:outputLabel value="¿Cómo evalúas la atención brindada por esta delegación en el 2021?:" for="resuelto" />  
       	<h:selectOneRadio value="#{hello.resuelto}">
-      		<f:selectItem itemValue="satisfactoriamente" itemLabel="Satisfactoriamente"></f:selectItem>
-      		<f:selectItem itemValue="Algo_resuelto" itemLabel="Algo Resuelto"></f:selectItem>
-      		<f:selectItem itemValue="No_fue_resueldo" itemLabel="No fue resuelto"></f:selectItem>
+      		<f:selectItem itemValue="Satisfecha" itemLabel="Satisfecha"></f:selectItem>
+      		<f:selectItem itemValue="Algo_satisfecho" itemLabel="Algo Satisfecha/ao"></f:selectItem>
+      		<f:selectItem itemValue="Insatisfecha" itemLabel="Insatisfecho/a"></f:selectItem>
       	</h:selectOneRadio>
       </p>
-      <p>
-       	<h:outputLabel value="Sugerencia" for="sugerencia" />
-      	<h:inputText value="#{hello.sugerencia}"></h:inputText>
-      </p>
         <p>
-       	<h:outputLabel value="Cursos" for="cursos" />
-      	<h:inputText value="#{hello.cursos}"></h:inputText>
+       	<h:outputLabel value="¿En qué temas te querés capacitar o sentís que necesitás reforzar habilidades? " for="cursos" />
+       
+      	
       </p>
+      <p>
+       	<h:outputLabel value="Tus sugerencias nos ayudan a mejorar: " for="sugerencia" />
+      	
+      </p>
+      
 		<p>
 		<h:commandButton id="enviar" value="Enviar Encuesta" action="#{hello.save()}" />
 		</p>
