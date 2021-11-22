@@ -13,7 +13,7 @@
 		</properties>
 	</persistence-unit> -->
 	
-	<persistence-unit name="people"  transaction-type="JTA"> 
+	<!-- <persistence-unit name="people"  transaction-type="JTA"> 
 		<jta-data-source>java:jboss/datasources/mysqlopenshift</jta-data-source>
 		<properties> 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
@@ -21,13 +21,13 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 		</properties>
-	</persistence-unit>
+	</persistence-unit> -->
 	
-	 <!--  <persistence-unit name="primary"> 
+	  <persistence-unit name="primary"> 
       <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
       <properties>
          <property name="hibernate.hbm2ddl.auto" value="create-drop" />
          <property name="hibernate.show_sql" value="false" />
       </properties>
-   </persistence-unit> -->
+   </persistence-unit>
 </persistence>
