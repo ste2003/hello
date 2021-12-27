@@ -13,7 +13,7 @@
 		</properties>
 	</persistence-unit> -->
 	
-	<persistence-unit name="people"  transaction-type="JTA"> 
+	<persistence-unit name="testdb"  transaction-type="JTA"> 
 		<jta-data-source>java:jboss/datasources/mysqlopenshift</jta-data-source>
 		<properties> 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
