@@ -14,9 +14,8 @@
 	</persistence-unit> -->
 	
 	<persistence-unit name="testdb"  transaction-type="JTA"> 
-		<!-- <jta-data-source>java:jboss/datasources/mysqlopenshift</jta-data-source> -->
-		
-		<jta-data-source>java:jboss/datasources/test_mysql</jta-data-source>
+		<jta-data-source>java:jboss/datasources/mysqlopenshift</jta-data-source>
+		<!-- <jta-data-source>java:jboss/datasources/test_mysql</jta-data-source> -->
 		<properties> 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
