@@ -23,20 +23,12 @@
 		</properties>
 	</persistence-unit> -->
 	
-	<!--  <persistence-unit name="primary"> 
+  <persistence-unit name="primary"> 
       <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
       <properties>
          <property name="hibernate.hbm2ddl.auto" value="create-drop" />
          <property name="hibernate.show_sql" value="false" />
       </properties>
-   </persistence-unit> -->
-	 <persistence-unit name="todos-db">
-        <jta-data-source>java:jboss/datasources/PostgreSQLDS</jta-data-source>
-        <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/data.sql" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            <property name="hibernate.show_sql" value="true"/>
-        </properties>
-    </persistence-unit>
+   </persistence-unit> 
+	 
 </persistence>
